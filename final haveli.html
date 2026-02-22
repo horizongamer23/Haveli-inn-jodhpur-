@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Haveli Inn | Heritage Stay Jodhpur</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --primary: #5D4037;
+            --gold: #C5A059;
+            --cream: #FAF3E0;
+            --white: #FFFFFF;
+            --dark: #1a0f0a;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        body { font-family: 'Lato', sans-serif; background: #FDFBF7; color: #2C1810; scroll-behavior: smooth; }
+
+        @keyframes pulsePrice {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); background: #b08d4b; }
+            100% { transform: scale(1); }
+        }
+
+        /* --- HEADER --- */
+        header {
+            background: var(--white); height: 70px; display: flex; align-items: center;
+            position: fixed; top: 0; width: 100%; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .logo {
+            font-family: 'Cinzel', serif; font-size: 1.3rem; color: var(--primary);
+            text-decoration: none; font-weight: 800; position: absolute; left: 50%; transform: translateX(-50%);
+        }
+        .menu-toggle { font-size: 1.5rem; color: var(--primary); margin-left: 20px; cursor: pointer; }
+
+        .side-menu {
+            position: fixed; top: 0; left: -100%; width: 80%; height: 100%;
+            background: var(--primary); z-index: 1050; transition: 0.4s; padding: 80px 30px;
+            display: flex; flex-direction: column; gap: 20px;
+        }
+        .side-menu.active { left: 0; }
+        .side-menu a { color: var(--cream); text-decoration: none; font-family: 'Cinzel', serif; font-size: 1.2rem; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 10px; }
+        .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); display: none; z-index: 1040; }
+
+        /* --- 1. MAIN PAGE (HERO) --- */
+        .hero {
+            height: 90vh; margin-top: 70px;
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.5)), 
+                        url('https://images.unsplash.com/photo-1590050752117-23a9d7fc21ad?auto=format&fit=crop&w=1200&q=80');
+            background-size: cover; background-position: center;
+            display: flex; align-items: center; justify-content: center; text-align: center; padding: 20px;
+        }
+        .hero-content h1 { font-family: 'Cinzel', serif; font-size: 2.4rem; color: white; line-height: 1.2; margin-bottom: 15px; }
+        .hero-content p { color: #f0f0f0; font-size: 1.1rem; line-height: 1.6; max-width: 600px; margin: 0 auto; }
+        .animate-price {
+            display: inline-block; background: var(--gold); color: white; padding: 12px 25px;
+            font-weight: 800; border-radius: 50px; animation: pulsePrice 2s infinite; margin-top: 25px;
+        }
+
+        /* --- SECTION STYLING --- */
+        .section-padding { padding: 80px 20px; text-align: center; }
+        .section-title { font-family: 'Cinzel', serif; font-size: 1.8rem; margin-bottom: 40px; color: var(--primary); position: relative; }
+        .section-title::after { content: ''; display: block; width: 50px; height: 2px; background: var(--gold); margin: 10px auto; }
+
+        /* --- 2. ROOMS --- */
+        .rooms-section { background: #fdfbf7; }
+        .room-card { background: white; border-radius: 15px; overflow: hidden; margin-bottom: 30px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+        .room-img { width: 100%; height: 230px; object-fit: cover; }
+        .room-info { padding: 25px; }
+        .room-price { color: var(--gold); font-weight: 800; font-size: 1.3rem; display: block; margin-bottom: 15px; }
+        .book-btn { display: inline-block; padding: 12px 40px; background: var(--primary); color: white; text-decoration: none; font-weight: 800; border-radius: 40px; }
+
+        /* --- 3. AMENITIES --- */
+        .amenities-section { 
+            background: linear-gradient(rgba(250, 243, 224, 0.9), rgba(250, 243, 224, 0.9)), 
+                        url('https://www.transparenttextures.com/patterns/paper.png');
+        }
+        .amenity-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+        .amenity-card { background: white; padding: 25px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+        .amenity-card i { font-size: 2rem; color: var(--gold); margin-bottom: 10px; }
+        .amenity-card h4 { font-size: 0.9rem; color: var(--primary); font-weight: 700; }
+
+        /* --- 4. RESERVE YOUR SEAT (BOOKING) --- */
+        .booking-section { background: var(--primary); color: white; }
+        .booking-form { background: white; padding: 30px; border-radius: 15px; color: #333; max-width: 500px; margin: 0 auto; }
+        .form-group { margin-bottom: 15px; text-align: left; }
+        .form-group label { font-weight: 700; font-size: 0.85rem; color: var(--primary); }
+        .input-box { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; margin-top: 5px; }
+        .submit-btn { width: 100%; background: #25D366; color: white; border: none; padding: 15px; font-weight: 800; border-radius: 8px; cursor: pointer; font-size: 1rem; margin-top: 10px; }
+
+        /* --- 5. GUEST STORIES --- */
+        .reviews-section { background: #f4eee1; }
+        .review-box { background: white; padding: 30px; border-radius: 15px; margin-bottom: 25px; text-align: left; position: relative; border-left: 5px solid var(--gold); }
+        .review-box p { font-style: italic; color: #444; line-height: 1.5; }
+        .reviewer { display: block; margin-top: 15px; font-weight: 800; color: var(--primary); font-family: 'Cinzel'; }
+
+        /* --- 6. REACH US --- */
+        .location-section { background: white; }
+        .map-square { 
+            width: 100%; max-width: 450px; margin: 0 auto; 
+            aspect-ratio: 1 / 1; border: 8px solid var(--cream); 
+            border-radius: 20px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+        .map-square iframe { width: 100%; height: 100%; border: 0; }
+        .dir-btn { display: inline-block; margin-top: 25px; padding: 15px 35px; background: var(--primary); color: white; text-decoration: none; border-radius: 50px; font-weight: 700; box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
+
+        /* --- 7. CONTACT US (NEW) --- */
+        .contact-section { background: var(--dark); color: white; padding: 60px 20px; }
+        .contact-info { margin-top: 30px; display: flex; flex-direction: column; gap: 20px; align-items: center; }
+        .contact-item { display: flex; align-items: center; gap: 15px; font-size: 1.1rem; }
+        .contact-item i { color: var(--gold); font-size: 1.3rem; }
+        .contact-item a { color: white; text-decoration: none; }
+
+        footer { background: #000; color: #666; padding: 30px 20px; text-align: center; border-top: 1px solid #222; font-size: 0.8rem; }
+    </style>
+</head>
+<body>
+
+    <div class="overlay" id="overlay"></div>
+    <div class="side-menu" id="side-menu">
+        <a href="#home">Home</a>
+        <a href="#rooms">Our Rooms</a>
+        <a href="#amenities">Amenities</a>
+        <a href="#booking">Reserve Seat</a>
+        <a href="#reviews">Guest Stories</a>
+        <a href="#location">Reach Us</a>
+        <a href="#contact">Contact Us</a>
+    </div>
+
+    <header>
+        <div class="menu-toggle" id="open-menu"><i class="fas fa-bars"></i></div>
+        <a href="#" class="logo">HAVELI INN</a>
+    </header>
+
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Experience the Royal<br>Heritage of Jodhpur</h1>
+            <p>Stay in the heart of the Blue City where traditional Rajasthani culture meets modern comfort. Our Haveli offers a unique glimpse into the majestic history of Marwar.</p>
+            <div class="animate-price">Luxury Rooms Starting @ ₹999/-</div>
+        </div>
+    </section>
+
+    <section id="rooms" class="section-padding rooms-section">
+        <h2 class="section-title">Our Rooms</h2>
+        <div class="room-card">
+            <img src="https://images.unsplash.com/photo-1618773928121-c32242e63f39?w=600" class="room-img" alt="Standard">
+            <div class="room-info">
+                <h3>Standard Heritage</h3>
+                <span class="room-price">₹999 / Night</span>
+                <a href="#booking" class="book-btn" onclick="autoSelect('Standard Room (₹999)')">BOOK NOW</a>
+            </div>
+        </div>
+        <div class="room-card">
+            <img src="https://images.unsplash.com/photo-1590490360182-c33d57733427?w=600" class="room-img" alt="Deluxe">
+            <div class="room-info">
+                <h3>Royal Deluxe</h3>
+                <span class="room-price">₹1,499 / Night</span>
+                <a href="#booking" class="book-btn" onclick="autoSelect('Deluxe Room (₹1,499)')">BOOK NOW</a>
+            </div>
+        </div>
+        <div class="room-card">
+            <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=600" class="room-img" alt="Super Deluxe">
+            <div class="room-info">
+                <h3>Maharaja Super Deluxe</h3>
+                <span class="room-price">₹1,999 / Night</span>
+                <a href="#booking" class="book-btn" onclick="autoSelect('Super Deluxe (₹1,999)')">BOOK NOW</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="amenities" class="section-padding amenities-section">
+        <h2 class="section-title">Our Amenities</h2>
+        <div class="amenity-grid">
+            <div class="amenity-card"><i class="fas fa-wifi"></i><h4>Free Wi-Fi</h4></div>
+            <div class="amenity-card"><i class="fas fa-snowflake"></i><h4>Fully AC</h4></div>
+            <div class="amenity-card"><i class="fas fa-utensils"></i><h4>Roof Restaurant</h4></div>
+            <div class="amenity-card"><i class="fas fa-concierge-bell"></i><h4>Room Service</h4></div>
+        </div>
+    </section>
+
+    <section id="booking" class="section-padding booking-section">
+        <h2 class="section-title" style="color: white;">Reserve Your Seat</h2>
+        <div class="booking-form">
+            <form id="waForm">
+                <div class="form-group"><label>Guest Name</label><input type="text" id="name" class="input-box" required></div>
+                <div class="form-group">
+                    <label>Select Room</label>
+                    <select id="roomSelect" class="input-box">
+                        <option value="Standard Room (₹999)">Standard Heritage - ₹999</option>
+                        <option value="Deluxe Room (₹1,499)">Royal Deluxe - ₹1,499</option>
+                        <option value="Super Deluxe (₹1,999)">Maharaja Super Deluxe - ₹1,999</option>
+                    </select>
+                </div>
+                <div style="display: flex; gap: 10px;">
+                    <div class="form-group" style="flex:1;"><label>Check-in</label><input type="date" id="cin" class="input-box" required></div>
+                    <div class="form-group" style="flex:1;"><label>Check-out</label><input type="date" id="cout" class="input-box" required></div>
+                </div>
+                <button type="submit" class="submit-btn"><i class="fab fa-whatsapp"></i> Confirm via WhatsApp</button>
+            </form>
+        </div>
+    </section>
+
+    <section id="reviews" class="section-padding reviews-section">
+        <h2 class="section-title">Guest Stories</h2>
+        <div class="review-box">
+            <p>"The best budget heritage hotel in Jodhpur. The rooftop view of the fort is amazing!"</p>
+            <span class="reviewer">- Ankit Sharma</span>
+        </div>
+        <div class="review-box">
+            <p>"Very clean rooms and the staff is extremely helpful. Located right in the market area."</p>
+            <span class="reviewer">- Sneha Gupta</span>
+        </div>
+    </section>
+
+    <section id="location" class="section-padding location-section">
+        <h2 class="section-title">Reach Us</h2>
+        <p style="margin-bottom: 25px;">Near Bank of Baroda, Sojati Gate, Jodhpur</p>
+        <div class="map-square">
+            <iframe 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3577.6045155944116!2d73.02322967527194!3d26.29074098651478!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39418d4cd7974a23%3A0x23b4304893322a1f!2sHotel%20Haveli%20Inn!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin" 
+                allowfullscreen="" loading="lazy">
+            </iframe>
+        </div>
+        <a href="https://maps.app.goo.gl/ChIJI0qX1kyMQTkRf6oyk1gwtCc" target="_blank" class="dir-btn">
+            <i class="fas fa-map-marker-alt"></i> Open in Google Maps
+        </a>
+    </section>
+
+    <section id="contact" class="contact-section text-center">
+        <h2 class="section-title" style="color: white;">Contact Us</h2>
+        <div class="contact-info">
+            <div class="contact-item">
+                <i class="fas fa-phone-alt"></i>
+                <a href="tel:+919587377730">+91 95873 77730</a>
+            </div>
+            <div class="contact-item">
+                <i class="fas fa-envelope"></i>
+                <a href="mailto:haveliinnjodhpur@gmail.com">haveliinnjodhpur@gmail.com</a>
+            </div>
+            <div class="contact-item">
+                <i class="fas fa-map-marker-alt"></i>
+                <span>Sojati Gate, Jodhpur, Rajasthan</span>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p><b>Haveli Inn Jodhpur</b></p>
+        <p>© 2026 | All Rights Reserved</p>
+    </footer>
+
+    <script>
+        const menu = document.getElementById('side-menu');
+        const overlay = document.getElementById('overlay');
+        const openBtn = document.getElementById('open-menu');
+
+        openBtn.onclick = () => { menu.classList.add('active'); overlay.style.display = 'block'; }
+        overlay.onclick = () => { menu.classList.remove('active'); overlay.style.display = 'none'; }
+        
+        document.querySelectorAll('.side-menu a').forEach(link => {
+            link.onclick = () => { menu.classList.remove('active'); overlay.style.display = 'none'; }
+        });
+
+        function autoSelect(val) {
+            document.getElementById('roomSelect').value = val;
+            document.getElementById('booking').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        document.getElementById('waForm').onsubmit = function(e) {
+            e.preventDefault();
+            const name = document.getElementById('name').value;
+            const room = document.getElementById('roomSelect').value;
+            const cin = document.getElementById('cin').value;
+            const cout = document.getElementById('cout').value;
+            const msg = `Namaste Haveli Inn,%0A%0AI want to book a stay.%0A*Name:* ${name}%0A*Room:* ${room}%0A*Check-in:* ${cin}%0A*Check-out:* ${checkout}`;
+            window.open(`https://wa.me/919587377730?text=${msg}`, '_blank');
+        }
+    </script>
+</body>
+</html>
